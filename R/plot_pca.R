@@ -2,7 +2,6 @@
 #'
 #' This function loads files and plot PCA as output 
 #' 
-#' @param data_matrix
 #' @return plot
 #' @export
 
