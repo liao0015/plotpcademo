@@ -3,9 +3,11 @@
 #' This function loads files and plot PCA as output 
 #' @export
 
-plot_p<-function(){
+
 
 # two files as input:
+plot_pca<-function(){
+
 
 # read in experimental desgin
 ExperimentalDesign<-read.delim("inst/extdata/Experimental_Design.txt",header=TRUE)
@@ -16,11 +18,30 @@ ExperimentalDesign<-ExperimentalDesign[order(ExperimentalDesign$Old.Sample.Name)
 proteinGroups<-read.delim("inst/extdata/proteinGroups.txt",row.names=1,header=TRUE)
 
 # read in configuration from html in the future
-
-
-
+  
+  proteinGroups_Reversed<-proteinGroups[proteinGroups$Reverse=="+",]
+  proteinGroups_Contaminant<-proteinGroups[proteinGroups$Contaminant=="+",]
+  proteinGroups_Only.identified.by.site<-proteinGroups[proteinGroups$Only.identified.by.site=="+",]
+  
+  # count how many for the three reverse/contaminat/identified.by.site  
+  proteinGroups_count<-nrow(proteinGroups)
+  proteinGroups_count_Reversed<-nrow(proteinGroups_Reversed)
+  proteinGroups_count_Contaminant<-nrow(proteinGroups_Contaminant)  
+  proteinGroups_count_Only.identified.by.site<-nrow(proteinGroups_Only.identified.by.site)
+  
+  # remove all the rows marked as reverse/contaminat/identified.by.site
+  proteinGroups_filtered<-proteinGroups[proteinGroups$Reverse!="+" & proteinGroups$Contaminant!="+" & proteinGroups$Only.identified.by.site!="+",]
+  proteinGroups_filtered_count<-nrow(proteinGroups_filtered)
+  
+  proteinGroups_filtering<-(list(filtered=proteinGroups_filtered,
+              proteinGroups_count=proteinGroups_count,
+              proteinGroups_count_Reversed=proteinGroups_count_Reversed,
+              proteinGroups_count_Contaminant=proteinGroups_count_Contaminant,
+              proteinGroups_count_Only.identified.by.site=proteinGroups_count_Only.identified.by.site,
+              proteinGroups_filtered_count=proteinGroups_filtered_count    
+  ))
+  
 # Step 1: do filtering, to remove rows with contaminant/revers/identified by id
-proteinGroups_filtering<-proteinGroups_filter(proteinGroups)
 proteinGroups_filtered<-proteinGroups_filtering$filtered
 
 #The filtering summary can also be reported out to the user end
@@ -83,13 +104,22 @@ barplot(apply(proteinGroups_filtered_LFQ_intensity_log10_Q100_scaled.scaled, 2, 
 
 
 # Step 3: PCA plot, with screeplot 
-# pca.Inensity <- prcomp(t(proteinGroups_filtered_LFQ_intensity_log10_Q100_scaled.scaled), scale.=TRUE, center = TRUE) 
-# plot(pca.Inensity$x,col = ExperimentalDesign$Groups, pch=15, main="PCA plot")
-# calibrate::textxy(pca.Inensity$x[,1],pca.Inensity$x[,2], labs = rownames(pca.Inensity$x))
+pca.Inensity <- prcomp(t(proteinGroups_filtered_LFQ_intensity_log10_Q100_scaled.scaled), scale.=TRUE, center = TRUE) 
+plot(pca.Inensity$x,col = ExperimentalDesign$Groups, pch=15, main="PCA plot")
+calibrate::textxy(pca.Inensity$x[,1],pca.Inensity$x[,2], labs = rownames(pca.Inensity$x))
+
+  pca.Inensity <- prcomp(t(proteinGroups_filtered_LFQ_intensity_log10_Q100_scaled.scaled), scale.=TRUE, center = TRUE) 
+  sd <- pca.Inensity$sdev
+  loadings <- pca.Inensity$rotation
+  rownames(loadings) <- rownames(proteinGroups_filtered_LFQ_intensity_log10_Q100_scaled.scaled)
+  scores <- pca.Inensity$x
+  var <- sd^2
+  var.percent <- var/sum(var) * 100
+  barplot(var.percent, xlab="PC", ylab="Percent Variance", names.arg=1:length(var.percent), las=1, ylim=c(0,max(var.percent)), col="gray", main="Percent of Variance")
+  abline(h=1/nrow(proteinGroups_filtered_LFQ_intensity_log10_Q100_scaled.scaled)*100, col="red")
+
 
 }
-
-
 
 
 
