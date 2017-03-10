@@ -3,7 +3,7 @@
 #' This function loads files and plot PCA as output 
 #' @export
 
-plot_pca<-function(){
+plot_p<-function(){
 
 # two files as input:
 
