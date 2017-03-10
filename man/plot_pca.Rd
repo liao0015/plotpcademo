@@ -4,7 +4,7 @@
 \alias{plot_pca}
 \title{plot PCA}
 \usage{
-plot_pca(input1, input2, ...)
+plot_pca(fooinput1, fooinput2, ...)
 }
 \arguments{
 \item{input1}{experimental design input}

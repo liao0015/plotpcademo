@@ -4,10 +4,10 @@
 #' @export
 #' @param input1 experimental design input
 #' @param input2 protein groups input
-plot_pca<-function(input1, input2, ...){
+plot_pca<-function(fooinput1, fooinput2, ...){
 
-ExperimentalDesign<-input1
-proteinGroups<-input2
+ExperimentalDesign<-fooinput1
+proteinGroups<-fooinput2
 # read in experimental desgin
 #ExperimentalDesign<-read.delim("inst/extdata/Experimental_Design.txt",header=TRUE)
 #sort according to the file names
