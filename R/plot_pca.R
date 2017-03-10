@@ -1,10 +1,9 @@
 #' plot PCA
 #'
 #' This function loads files and plot PCA as output 
+#' @export
 #' @param ExperimentalDesign experimental design input
 #' @param proteinGroups protein groups input
-#' @export
-
 plot_pca<-function(ExperimentalDesign, proteinGroups){
 
 
