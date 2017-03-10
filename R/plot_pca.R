@@ -2,11 +2,12 @@
 #'
 #' This function loads files and plot PCA as output 
 #' @export
-#' @param ExperimentalDesign experimental design input
-#' @param proteinGroups protein groups input
-plot_pca<-function(ExperimentalDesign, proteinGroups){
+#' @param input1 experimental design input
+#' @param input2 protein groups input
+plot_pca<-function(input1, input2){
 
-
+ExperimentalDesign<-input1
+proteinGroups<-input2
 # read in experimental desgin
 #ExperimentalDesign<-read.delim("inst/extdata/Experimental_Design.txt",header=TRUE)
 #sort according to the file names
