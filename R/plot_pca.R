@@ -1,7 +1,7 @@
 #' plot PCA
 #'
 #' This function loads files and plot PCA as output 
-#' @param input1 experimental design input
+#' @param ExperimentalDesign experimental design input
 #' @param proteinGroups protein groups input
 #' @export
 

@@ -7,9 +7,9 @@
 plot_pca(ExperimentalDesign, proteinGroups)
 }
 \arguments{
-\item{proteinGroups}{protein groups input}
+\item{ExperimentalDesign}{experimental design input}
 
-\item{input1}{experimental design input}
+\item{proteinGroups}{protein groups input}
 }
 \description{
 This function loads files and plot PCA as output
