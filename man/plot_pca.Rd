@@ -6,9 +6,6 @@
 \usage{
 plot_pca()
 }
-\value{
-plot
-}
 \description{
 This function loads files and plot PCA as output
 }
