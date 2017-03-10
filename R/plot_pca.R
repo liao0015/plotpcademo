@@ -4,7 +4,7 @@
 #' @export
 #' @param input1 experimental design input
 #' @param input2 protein groups input
-plot_pca<-function(input1, input2){
+plot_pca<-function(input1, input2, ...){
 
 ExperimentalDesign<-input1
 proteinGroups<-input2
