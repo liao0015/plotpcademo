@@ -1,7 +1,7 @@
 #' plot PCA
 #'
 #' This function loads files and plot PCA as output 
-#'
+#' 
 #' @param data_matrix
 #' @return plot
 #' @export
@@ -12,8 +12,10 @@
 #     plot_pca
 ########################################################################################################
 # plot PCA screeplot
+plot_pca<-function(){
+  
 
-plot_pca<-function(data_matrix){
+PCA_Screeplot<-function(data_matrix){
   pca.Inensity <- prcomp(t(data_matrix), scale.=TRUE, center = TRUE) 
   sd <- pca.Inensity$sdev
   loadings <- pca.Inensity$rotation
@@ -146,9 +148,9 @@ calibrate::textxy(pca.Inensity$x[,1],pca.Inensity$x[,2], labs = rownames(pca.Ine
 
 # for Scree plot (PCA_Screeplot is a selfmade functions)
 # output sreen plot figure
-plot_pca(proteinGroups_filtered_LFQ_intensity_log10_Q100_scaled.scaled)
+PCA_Screeplot(proteinGroups_filtered_LFQ_intensity_log10_Q100_scaled.scaled)
 
-
+}
 
 
 

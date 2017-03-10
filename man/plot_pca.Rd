@@ -4,7 +4,7 @@
 \alias{plot_pca}
 \title{plot PCA}
 \usage{
-plot_pca(data_matrix)
+plot_pca()
 }
 \value{
 plot
