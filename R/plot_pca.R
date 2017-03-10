@@ -92,7 +92,7 @@ calibrate::textxy(pca.Inensity$x[,1],pca.Inensity$x[,2], labs = rownames(pca.Ine
 
 # for Scree plot (PCA_Screeplot is a selfmade functions)
 # output sreen plot figure
-PCA_Screeplot(proteinGroups_filtered_LFQ_intensity_log10_Q100_scaled.scaled)
+#PCA_Screeplot(proteinGroups_filtered_LFQ_intensity_log10_Q100_scaled.scaled)
 
 }
 
