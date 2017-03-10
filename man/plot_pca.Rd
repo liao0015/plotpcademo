@@ -4,7 +4,12 @@
 \alias{plot_pca}
 \title{plot PCA}
 \usage{
-plot_pca()
+plot_pca(input1, proteinGroups)
+}
+\arguments{
+\item{input1}{experimental design input}
+
+\item{proteinGroups}{protein groups input}
 }
 \description{
 This function loads files and plot PCA as output
