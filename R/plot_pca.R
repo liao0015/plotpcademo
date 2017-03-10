@@ -97,22 +97,6 @@ calibrate::textxy(pca.Inensity$x[,1],pca.Inensity$x[,2], labs = rownames(pca.Ine
 }
 
 
-########################################################################################################
-#     subfunction
-#     plot_pca
-########################################################################################################
-# plot PCA screeplot
-PCA_Screeplot<-function(data_matrix){
-  pca.Inensity <- prcomp(t(data_matrix), scale.=TRUE, center = TRUE) 
-  sd <- pca.Inensity$sdev
-  loadings <- pca.Inensity$rotation
-  rownames(loadings) <- rownames(data_matrix)
-  scores <- pca.Inensity$x
-  var <- sd^2
-  var.percent <- var/sum(var) * 100
-  barplot(var.percent, xlab="PC", ylab="Percent Variance", names.arg=1:length(var.percent), las=1, ylim=c(0,max(var.percent)), col="gray", main="Percent of Variance")
-  abline(h=1/nrow(data_matrix)*100, col="red")
-}
 
 
 ########################################################################################################
