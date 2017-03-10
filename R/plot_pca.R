@@ -5,13 +5,13 @@
 #' @param proteinGroups protein groups input
 #' @export
 
-plot_pca<-function(input1, proteinGroups){
+plot_pca<-function(ExperimentalDesign, proteinGroups){
 
 
 # read in experimental desgin
 #ExperimentalDesign<-read.delim("inst/extdata/Experimental_Design.txt",header=TRUE)
 #sort according to the file names
-ExperimentalDesign<-input1[order(input1$Old.Sample.Name),]
+ExperimentalDesign<-ExperimentalDesign[order(ExperimentalDesign$Old.Sample.Name),]
 
 # read in full proteinGroups.txt file
 #proteinGroups<-read.delim("inst/extdata/proteinGroups.txt",row.names=1,header=TRUE)
