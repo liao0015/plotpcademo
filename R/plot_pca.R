@@ -13,7 +13,11 @@
 ########################################################################################################
 # plot PCA screeplot
 plot_pca<-function(){
-  
+
+# for Scree plot (PCA_Screeplot is a selfmade functions)
+# output sreen plot figure
+PCA_Screeplot(proteinGroups_filtered_LFQ_intensity_log10_Q100_scaled.scaled)
+
 
 PCA_Screeplot<-function(data_matrix){
   pca.Inensity <- prcomp(t(data_matrix), scale.=TRUE, center = TRUE) 
@@ -146,9 +150,7 @@ pca.Inensity <- prcomp(t(proteinGroups_filtered_LFQ_intensity_log10_Q100_scaled.
 plot(pca.Inensity$x,col = ExperimentalDesign$Groups, pch=15, main="PCA plot")
 calibrate::textxy(pca.Inensity$x[,1],pca.Inensity$x[,2], labs = rownames(pca.Inensity$x))
 
-# for Scree plot (PCA_Screeplot is a selfmade functions)
-# output sreen plot figure
-PCA_Screeplot(proteinGroups_filtered_LFQ_intensity_log10_Q100_scaled.scaled)
+
 
 }
 
