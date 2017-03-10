@@ -83,9 +83,9 @@ barplot(apply(proteinGroups_filtered_LFQ_intensity_log10_Q100_scaled.scaled, 2, 
 
 
 # Step 3: PCA plot, with screeplot 
-pca.Inensity <- prcomp(t(proteinGroups_filtered_LFQ_intensity_log10_Q100_scaled.scaled), scale.=TRUE, center = TRUE) 
-plot(pca.Inensity$x,col = ExperimentalDesign$Groups, pch=15, main="PCA plot")
-calibrate::textxy(pca.Inensity$x[,1],pca.Inensity$x[,2], labs = rownames(pca.Inensity$x))
+# pca.Inensity <- prcomp(t(proteinGroups_filtered_LFQ_intensity_log10_Q100_scaled.scaled), scale.=TRUE, center = TRUE) 
+# plot(pca.Inensity$x,col = ExperimentalDesign$Groups, pch=15, main="PCA plot")
+# calibrate::textxy(pca.Inensity$x[,1],pca.Inensity$x[,2], labs = rownames(pca.Inensity$x))
 
 }
 
