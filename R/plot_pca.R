@@ -5,67 +5,7 @@
 #' @return plot
 #' @export
 
-
-########################################################################################################
-#     subfunction
-#     plot_pca
-########################################################################################################
-# plot PCA screeplot
 plot_pca<-function(){
-
-# for Scree plot (PCA_Screeplot is a selfmade functions)
-# output sreen plot figure
-PCA_Screeplot(proteinGroups_filtered_LFQ_intensity_log10_Q100_scaled.scaled)
-
-
-PCA_Screeplot<-function(data_matrix){
-  pca.Inensity <- prcomp(t(data_matrix), scale.=TRUE, center = TRUE) 
-  sd <- pca.Inensity$sdev
-  loadings <- pca.Inensity$rotation
-  rownames(loadings) <- rownames(data_matrix)
-  scores <- pca.Inensity$x
-  var <- sd^2
-  var.percent <- var/sum(var) * 100
-  barplot(var.percent, xlab="PC", ylab="Percent Variance", names.arg=1:length(var.percent), las=1, ylim=c(0,max(var.percent)), col="gray", main="Percent of Variance")
-  abline(h=1/nrow(data_matrix)*100, col="red")
-}
-
-
-
-########################################################################################################
-#     subfunction
-#     proteinGroups_filter
-########################################################################################################
-# do primary filtering (reversed/contaminant/only by site) and counting
-# the input is the data frame imported directly from maxquant output file
-proteinGroups_filter=function(proteinGroups){
-  
-  proteinGroups_Reversed<-proteinGroups[proteinGroups$Reverse=="+",]
-  proteinGroups_Contaminant<-proteinGroups[proteinGroups$Contaminant=="+",]
-  proteinGroups_Only.identified.by.site<-proteinGroups[proteinGroups$Only.identified.by.site=="+",]
-  
-  # count how many for the three reverse/contaminat/identified.by.site  
-  proteinGroups_count<-nrow(proteinGroups)
-  proteinGroups_count_Reversed<-nrow(proteinGroups_Reversed)
-  proteinGroups_count_Contaminant<-nrow(proteinGroups_Contaminant)  
-  proteinGroups_count_Only.identified.by.site<-nrow(proteinGroups_Only.identified.by.site)
-  
-  # remove all the rows marked as reverse/contaminat/identified.by.site
-  proteinGroups_filtered<-proteinGroups[proteinGroups$Reverse!="+" & proteinGroups$Contaminant!="+" & proteinGroups$Only.identified.by.site!="+",]
-  proteinGroups_filtered_count<-nrow(proteinGroups_filtered)
-  
-  return(list(filtered=proteinGroups_filtered,
-              proteinGroups_count=proteinGroups_count,
-              proteinGroups_count_Reversed=proteinGroups_count_Reversed,
-              proteinGroups_count_Contaminant=proteinGroups_count_Contaminant,
-              proteinGroups_count_Only.identified.by.site=proteinGroups_count_Only.identified.by.site,
-              proteinGroups_filtered_count=proteinGroups_filtered_count    
-  ))
-  
-}
-
-
-
 
 # two files as input:
 
@@ -150,9 +90,62 @@ plot(pca.Inensity$x,col = ExperimentalDesign$Groups, pch=15, main="PCA plot")
 calibrate::textxy(pca.Inensity$x[,1],pca.Inensity$x[,2], labs = rownames(pca.Inensity$x))
 
 
+# for Scree plot (PCA_Screeplot is a selfmade functions)
+# output sreen plot figure
+PCA_Screeplot(proteinGroups_filtered_LFQ_intensity_log10_Q100_scaled.scaled)
 
 }
 
+
+########################################################################################################
+#     subfunction
+#     plot_pca
+########################################################################################################
+# plot PCA screeplot
+PCA_Screeplot<-function(data_matrix){
+  pca.Inensity <- prcomp(t(data_matrix), scale.=TRUE, center = TRUE) 
+  sd <- pca.Inensity$sdev
+  loadings <- pca.Inensity$rotation
+  rownames(loadings) <- rownames(data_matrix)
+  scores <- pca.Inensity$x
+  var <- sd^2
+  var.percent <- var/sum(var) * 100
+  barplot(var.percent, xlab="PC", ylab="Percent Variance", names.arg=1:length(var.percent), las=1, ylim=c(0,max(var.percent)), col="gray", main="Percent of Variance")
+  abline(h=1/nrow(data_matrix)*100, col="red")
+}
+
+
+########################################################################################################
+#     subfunction
+#     proteinGroups_filter
+########################################################################################################
+# do primary filtering (reversed/contaminant/only by site) and counting
+# the input is the data frame imported directly from maxquant output file
+proteinGroups_filter=function(proteinGroups){
+  
+  proteinGroups_Reversed<-proteinGroups[proteinGroups$Reverse=="+",]
+  proteinGroups_Contaminant<-proteinGroups[proteinGroups$Contaminant=="+",]
+  proteinGroups_Only.identified.by.site<-proteinGroups[proteinGroups$Only.identified.by.site=="+",]
+  
+  # count how many for the three reverse/contaminat/identified.by.site  
+  proteinGroups_count<-nrow(proteinGroups)
+  proteinGroups_count_Reversed<-nrow(proteinGroups_Reversed)
+  proteinGroups_count_Contaminant<-nrow(proteinGroups_Contaminant)  
+  proteinGroups_count_Only.identified.by.site<-nrow(proteinGroups_Only.identified.by.site)
+  
+  # remove all the rows marked as reverse/contaminat/identified.by.site
+  proteinGroups_filtered<-proteinGroups[proteinGroups$Reverse!="+" & proteinGroups$Contaminant!="+" & proteinGroups$Only.identified.by.site!="+",]
+  proteinGroups_filtered_count<-nrow(proteinGroups_filtered)
+  
+  return(list(filtered=proteinGroups_filtered,
+              proteinGroups_count=proteinGroups_count,
+              proteinGroups_count_Reversed=proteinGroups_count_Reversed,
+              proteinGroups_count_Contaminant=proteinGroups_count_Contaminant,
+              proteinGroups_count_Only.identified.by.site=proteinGroups_count_Only.identified.by.site,
+              proteinGroups_filtered_count=proteinGroups_filtered_count    
+  ))
+  
+}
 
 
 
